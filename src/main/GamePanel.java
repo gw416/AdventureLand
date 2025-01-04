@@ -7,13 +7,15 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 	
 	// Screen Settings
 	final int originalTileSize = 16; //16x16 pixel tile
 	final int scale = 3;
 	
-	final int tileSize = originalTileSize * scale;  // 48x48 tile size
+	public final int tileSize = originalTileSize * scale;  // 48x48 tile size
 	
 	// ratio 4:3 for screen
 	final int maxScreenCol = 16; // 16 tiles horizontally
@@ -26,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	Player player = new Player(this, keyH);
 	
 	// set players default position
 	int playerX = 100;
@@ -48,39 +51,6 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread.start();
 	}
 
-//	@Override
-//	public void run() {
-//		
-//		// Game Loop
-//		while(gameThread != null) {
-//			
-//			double drawInterval = 1000000000/FPS; //0.01666 seconds
-//			double nextDrawTime = System.nanoTime() + drawInterval;
-//			
-//			update();
-//			repaint();
-//			
-//			
-//			try {
-//				double remainingTime = nextDrawTime - System.nanoTime();
-//				remainingTime = remainingTime / 1000000; // convert from nano to milli
-//				
-//				if(remainingTime < 0 )
-//					remainingTime = 0;
-//				
-//				Thread.sleep((long) remainingTime);
-//				
-//				nextDrawTime += drawInterval;
-//				
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//		
-//		
-//	}
-	
 	
 	@Override
 	public void run() {
@@ -118,18 +88,9 @@ public class GamePanel extends JPanel implements Runnable{
 	//   X value increases to the right, Y value increases down.
 	public void update() {
 		
-		if(keyH.upPressed) {
-			playerY -= playerSpeed;
-		}
-		else if(keyH.downPressed) {
-			playerY += playerSpeed;
-		}
-		else if(keyH.leftPressed) {
-			playerX -= playerSpeed;
-		}
-		else if(keyH.rightPressed) {
-			playerX += playerSpeed;
-		}
+		player.update();
+		
+		
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -138,9 +99,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		g2.setColor(Color.white);
-		
-		g2.fillRect(playerX, playerY, tileSize, tileSize);
+		player.draw(g2);
 		
 		g2.dispose();
 		
