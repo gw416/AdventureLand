@@ -48,6 +48,9 @@ public class Player extends Entity {
 		}
 	}
 	
+	
+	// In Java the upper left corner of screen is X:0, Y:0. 
+		//   X value increases to the right, Y value increases down.
 	public void update() { 
 		
 		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
