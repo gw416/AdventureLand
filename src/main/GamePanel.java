@@ -30,10 +30,6 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	Player player = new Player(this, keyH);
 	
-	// set players default position
-	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
 	
 	public GamePanel() {
 		
@@ -84,8 +80,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	
-	// In Java the upper left corner of screen is X:0, Y:0. 
-	//   X value increases to the right, Y value increases down.
+	
 	public void update() {
 		
 		player.update();
