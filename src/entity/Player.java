@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -12,10 +11,8 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-	
 	GamePanel gp;
-	KeyHandler keyH;
-	
+	KeyHandler keyH;	
 	public final int screenX;
 	public final int screenY;
 	
@@ -23,7 +20,6 @@ public class Player extends Entity {
 		
 		this.gp = gp;
 		this.keyH = keyH;
-		
 		screenX = gp.screenWidth / 2 - (gp.tileSize/2);
 		screenY = gp.screenHeight / 2  - (gp.tileSize/2);
 		
@@ -53,7 +49,6 @@ public class Player extends Entity {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	// In Java the upper left corner of screen is X:0, Y:0. 
 		//   X value increases to the right, Y value increases down.
@@ -94,10 +89,8 @@ public class Player extends Entity {
 	public void draw(Graphics2D g2) {
 		
 		//g2.setColor(Color.white);
-		//g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-		
+		//g2.fillRect(x, y, gp.tileSize, gp.tileSize);	
 		BufferedImage image = null;
-		
 		switch(direction) {
 			case "up":
 				if(spriteNum == 1) {
@@ -135,11 +128,3 @@ public class Player extends Entity {
 		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 	}
 }
-
-
-
-
-
-
-
-
