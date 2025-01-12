@@ -1,7 +1,6 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,37 +26,26 @@ public class TileManager {
 		
 	}
 	
-	
-	public void getTileImage() {
-		
+	public void getTileImage() {	
 		try { 
 			tile[0] = new Tile();
 			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
-			
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Wall.png"));
-			
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Water.png"));
-			
 			tile[3] = new Tile();
 			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Earth.png"));
-			
 			tile[4] = new Tile();
 			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Tree.png"));
-			
 			tile[5] = new Tile();
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Sand.png"));
-			
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
-	public void loadMap(String filePath) {
-		
-		
+	public void loadMap(String filePath) {	
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -99,7 +87,6 @@ public class TileManager {
 		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			
 			int tileNum = mapTileNum[worldCol][worldRow];
-			
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -123,14 +110,3 @@ public class TileManager {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -38,15 +38,13 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	public Player player = new Player(this, keyH);
 	
-	
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
-		this.setFocusable(true);
-		
+		this.setFocusable(true);		
 	}
 	
 	public void startGameThread() { 
@@ -55,7 +53,6 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread.start();
 	}
 
-	
 	@Override
 	public void run() {
 		
@@ -87,32 +84,19 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
-	
-	
 	public void update() {
 		
-		player.update();
-		
-		
+		player.update();	
 	}
 	
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
-		
 		Graphics2D g2 = (Graphics2D)g;
 		
 		tileM.draw(g2);
-		
 		player.draw(g2);
 		
-		
 		g2.dispose();
-		
 	}
-	
-	
-	
-	
-	
 }
