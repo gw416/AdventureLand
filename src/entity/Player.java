@@ -116,19 +116,26 @@ public class Player extends Entity {
 			String objectName = gp.obj[i].name;
 			
 			switch(objectName) {
-			case "Key":
-				hasKey++;
-				gp.obj[i] = null;
-				System.out.println("Key Found and added to inventory, you have "+hasKey+" Keys!");
-				break;
-			case "Door":
-				if(hasKey > 0) {
+				case "Key":
+					gp.playSE(1);
+					hasKey++;
 					gp.obj[i] = null;
-					System.out.println("Door opened using a Key! ");
-					hasKey--;
-				}
-				System.out.println("You have "+hasKey+" Keys!");
-				break;
+					System.out.println("Key Found and added to inventory, you have "+hasKey+" Keys!");
+					break;
+				case "Door":
+					if(hasKey > 0) {
+						gp.playSE(3);
+						gp.obj[i] = null;
+						System.out.println("Door opened using a Key! ");
+						hasKey--;
+					}
+					System.out.println("You have "+hasKey+" Keys!");
+					break;
+				case "Ball":
+					gp.playSE(2);
+					speed += 1;
+					gp.obj[i] = null;
+					break;
 			}
 		}
 	}
