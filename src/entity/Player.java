@@ -16,7 +16,7 @@ public class Player extends Entity {
 	KeyHandler keyH;	
 	public final int screenX;
 	public final int screenY;
-	int hasKey = 0;
+	public int hasKey = 0;
 	
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
@@ -120,21 +120,28 @@ public class Player extends Entity {
 					gp.playSE(1);
 					hasKey++;
 					gp.obj[i] = null;
-					System.out.println("Key Found and added to inventory, you have "+hasKey+" Keys!");
+					gp.ui.showMessage("You have found a Key!");
 					break;
 				case "Door":
 					if(hasKey > 0) {
 						gp.playSE(3);
 						gp.obj[i] = null;
-						System.out.println("Door opened using a Key! ");
 						hasKey--;
+						gp.ui.showMessage("You used a Key on a Door!");
+					}else {
+						gp.ui.showMessage("You need a Key!");
 					}
-					System.out.println("You have "+hasKey+" Keys!");
 					break;
 				case "Ball":
 					gp.playSE(2);
 					speed += 1;
 					gp.obj[i] = null;
+					gp.ui.showMessage("Ball means hyper!");
+					break;
+				case "Chest":
+					gp.ui.gameOver = true;
+					gp.stopMusic();
+					gp.playSE(4);
 					break;
 			}
 		}
