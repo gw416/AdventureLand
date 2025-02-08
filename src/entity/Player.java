@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
@@ -46,19 +47,29 @@ public class Player extends Entity {
 	}
 	
 	public void getPlayerImage() {
+
+		up1    = setup("Milky_Up1");
+		up2    = setup("Milky_Up2");
+		down1  = setup("Milky_Down1");
+		down2  = setup("Milky_Down2");
+		left1  = setup("Milky_Left1");
+		left2  = setup("Milky_Left2");
+		right1 = setup("Milky_Right1");
+		right2 = setup("Milky_Right2");
+	}
+	
+	public BufferedImage setup(String imageName) {
+		
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
 		try {
-			up1    = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Up1.png"));
-			up2    = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Up2.png"));
-			down1  = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Down1.png"));
-			down2  = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Down2.png"));
-			left1  = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Left1.png"));
-			left2  = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Left2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Right1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Milky_Right2.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/player/"+imageName+".png"));
+			image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
 			
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
+		return image;
 	}
 	
 	// In Java the upper left corner of screen is X:0, Y:0. 
@@ -186,6 +197,6 @@ public class Player extends Entity {
 				}
 				break;
 		}
-		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, screenX, screenY, null);
 	}
 }
