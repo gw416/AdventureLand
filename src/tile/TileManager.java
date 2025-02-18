@@ -21,7 +21,7 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		
 		this.gp = gp;
-		tile = new Tile[10];
+		tile = new Tile[20];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImage();
 		loadMap("/maps/world01.txt");
@@ -30,12 +30,15 @@ public class TileManager {
 	
 	public void getTileImage() {	
 		
-			setup(0, "Grass", false);
+			setup(0, "Grass_Plain", false);
 			setup(1, "Wall", true);
 			setup(2, "Water", true);
 			setup(3, "Earth", false);
 			setup(4, "Tree", true);
 			setup(5, "Sand", false);
+			setup(6, "Grass", false);
+
+			
 			
 	}
 	
