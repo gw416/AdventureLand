@@ -13,16 +13,15 @@ import main.UtilityTool;
 
 public class Player extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;	
 	public final int screenX;
 	public final int screenY;
-	public int hasKey = 0;
 	
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
-		this.gp = gp;
+		super(gp); 
+		
 		this.keyH = keyH;
 		screenX = gp.screenWidth / 2 - (gp.tileSize/2);
 		screenY = gp.screenHeight / 2  - (gp.tileSize/2);
@@ -48,29 +47,17 @@ public class Player extends Entity {
 	
 	public void getPlayerImage() {
 
-		up1    = setup("Milky_Up1");
-		up2    = setup("Milky_Up2");
-		down1  = setup("Milky_Down1");
-		down2  = setup("Milky_Down2");
-		left1  = setup("Milky_Left1");
-		left2  = setup("Milky_Left2");
-		right1 = setup("Milky_Right1");
-		right2 = setup("Milky_Right2");
+		up1    = setup("/player/Milky_Up1");
+		up2    = setup("/player/Milky_Up2");
+		down1  = setup("/player/Milky_Down1");
+		down2  = setup("/player/Milky_Down2");
+		left1  = setup("/player/Milky_Left1");
+		left2  = setup("/player/Milky_Left2");
+		right1 = setup("/player/Milky_Right1");
+		right2 = setup("/player/Milky_Right2");
 	}
 	
-	public BufferedImage setup(String imageName) {
-		
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/player/"+imageName+".png"));
-			image = uTool.scaledImage(image, gp.tileSize, gp.tileSize);
-			
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		return image;
-	}
+	
 	
 	// In Java the upper left corner of screen is X:0, Y:0. 
 		//   X value increases to the right, Y value increases down.
@@ -95,11 +82,15 @@ public class Player extends Entity {
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
 			
-			// check object collision
+			// Check Object Collision
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
-			// If Collision is false, player can move
+			// Check NPC Collision
+			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+			interactNPX(npcIndex);
+					
+			// If Collision is false, Player can move
 			if(collisionOn == false) {
 				switch(direction) {
 					case "up": worldY -= speed; break;
@@ -124,37 +115,13 @@ public class Player extends Entity {
 	
 	public void pickUpObject(int i) {
 		if(i != 999) {
-			String objectName = gp.obj[i].name;
 			
-			switch(objectName) {
-				case "Key":
-					gp.playSE(1);
-					hasKey++;
-					gp.obj[i] = null;
-					gp.ui.showMessage("You have found a Key!");
-					break;
-				case "Door":
-					if(hasKey > 0) {
-						gp.playSE(3);
-						gp.obj[i] = null;
-						hasKey--;
-						gp.ui.showMessage("You used a Key on a Door!");
-					}else {
-						gp.ui.showMessage("You need a Key!");
-					}
-					break;
-				case "Ball":
-					gp.playSE(2);
-					speed += 1;
-					gp.obj[i] = null;
-					gp.ui.showMessage("Ball means hyper!");
-					break;
-				case "Chest":
-					gp.ui.gameOver = true;
-					gp.stopMusic();
-					gp.playSE(4);
-					break;
-			}
+		}
+	}
+	
+	public void interactNPX(int i) {
+		if(i != 999) {
+			System.out.println("U R hitting npc");
 		}
 	}
 	
