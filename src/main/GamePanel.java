@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(this);
+	public KeyHandler keyH = new KeyHandler(this);
 	
 	Sound music = new Sound();
 	Sound se = new Sound();
@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int gameState;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int dialogueState = 3;
 	
 	public GamePanel() {
 		
@@ -103,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if(timer >= 1000000000) {
-				System.out.println("FPS: " + drawCount);
+				//System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
