@@ -13,6 +13,7 @@ public class NPC_OldMan extends Entity {
 		speed = 1;
 		
 		getImage();
+		setDialogue();
 	}
 	
 	public void getImage() {
@@ -24,6 +25,14 @@ public class NPC_OldMan extends Entity {
 		left2  = setup("/npc/OldMan_Left2");
 		right1 = setup("/npc/OldMan_Right1");
 		right2 = setup("/npc/OldMan_Right2");
+	}
+	
+	public void setDialogue() {
+		dialogues[0] = "Hello there, Traveler...";
+		dialogues[1] = "You must be here for the Treasure...Or at least,\n for the view...";
+		dialogues[2] = "Wait.. I meant to say there is definetly no \nTreasure here...";
+		dialogues[3] = "... Crap.";
+
 	}
 	
 	public void setAction() {
@@ -51,5 +60,8 @@ public class NPC_OldMan extends Entity {
 		
 	}
 	
+	public void speak() {
+		super.speak();
+	}
 	
 }
