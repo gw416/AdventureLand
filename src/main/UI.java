@@ -14,6 +14,9 @@ public class UI {
 	Font arial_30;
 	Font arial_40;
 	Font arial_80B;
+	Font arial_90;
+	Font arial_90B;
+
 	
 	public boolean messageOn = false;
 	public String message = "";
@@ -27,6 +30,9 @@ public class UI {
 		arial_30 = new Font("Arial", Font.PLAIN, 30);
 		arial_40 = new Font("Arial", Font.PLAIN, 40);
 		arial_80B = new Font("Arial", Font.BOLD, 80);
+		arial_90 = new Font("Arial", Font.BOLD, 90);
+		arial_90B = new Font("Arial", Font.PLAIN, 90);
+
 
 	}
 	
